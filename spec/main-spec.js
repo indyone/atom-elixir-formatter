@@ -42,30 +42,17 @@ describe("Main", () => {
       ).toBe(true);
     });
 
-    it("should default elixirExecutable to 'elixir'", () => {
-      expect(atom.config.get("atom-elixir-formatter.elixirExecutable")).toEqual(
-        "elixir"
-      );
-    });
-
-    it("should default mixExecutable to 'mix'", () => {
-      expect(atom.config.get("atom-elixir-formatter.mixExecutable")).toEqual(
-        "mix"
-      );
+    it("should default elixirPath to 'elixir'", () => {
+      expect(
+        atom.config.get("atom-elixir-formatter.elixirPath")
+      ).toEqual("");
     });
   });
 
-  describe("elixirExecutable", () => {
-    it("defaults to 'mix' when undefined", () => {
-      atom.config.set("atom-elixir-formatter.elixirExecutable", undefined);
-      expect(main.elixirExecutable()).toEqual("elixir");
-    });
-  });
-
-  describe("mixExecutable", () => {
-    it("defaults to 'mix' when undefined", () => {
-      atom.config.set("atom-elixir-formatter.mixExecutable", undefined);
-      expect(main.mixExecutable()).toEqual("mix");
+  describe("elixirPath", () => {
+    it("defaults to '' when undefined", () => {
+      atom.config.set("atom-elixir-formatter.elixirPath", undefined);
+      expect(main.elixirPath()).toEqual("");
     });
   });
 });

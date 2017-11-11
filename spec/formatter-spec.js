@@ -103,49 +103,24 @@ describe("Formatter", () => {
       formatter.runFormat("input text");
 
       expect(process.spawnSync).toHaveBeenCalledWith(
-        "elixir",
-        ["mix", "format", "-"],
+        "mix",
+        ["format", "-"],
         { input: "input text", shell: true, cwd: main.projectPath() }
       );
     });
 
     it("uses elixirExecutable setting when defined", () => {
       atom.config.set(
-        "atom-elixir-formatter.elixirExecutable",
-        "/path with spaces/elixir"
+        "atom-elixir-formatter.elixirPath",
+        "/path with spaces"
       );
       formatter.runFormat("input text");
 
       expect(
         process.spawnSync
       ).toHaveBeenCalledWith(
-        '"/path with spaces/elixir"',
-        ["mix", "format", "-"],
-        { input: "input text", shell: true, cwd: main.projectPath() }
-      );
-    });
-
-    it("uses default mix when mixExecutable setting undefined", () => {
-      atom.config.set("atom-elixir-formatter.mixExecutable", undefined);
-      formatter.runFormat("input text");
-
-      expect(process.spawnSync).toHaveBeenCalledWith(
-        "elixir",
-        ["mix", "format", "-"],
-        { input: "input text", shell: true, cwd: main.projectPath() }
-      );
-    });
-
-    it("uses mixExecutable setting when defined", () => {
-      atom.config.set(
-        "atom-elixir-formatter.mixExecutable",
-        "/path with spaces/mix"
-      );
-      formatter.runFormat("input text");
-
-      expect(process.spawnSync).toHaveBeenCalledWith(
-        "elixir",
-        ['"/path with spaces/mix"', "format", "-"],
+        `"${path.sep}path with spaces${path.sep}elixir"`,
+        [`"${path.sep}path with spaces${path.sep}mix"`, "format", "-"],
         { input: "input text", shell: true, cwd: main.projectPath() }
       );
     });
@@ -154,8 +129,8 @@ describe("Formatter", () => {
       formatter.runFormat("input text");
 
       expect(process.spawnSync).toHaveBeenCalledWith(
-        "elixir",
-        ["mix", "format", "-"],
+        "mix",
+        ["format", "-"],
         { input: "input text", shell: true, cwd: main.projectPath() }
       );
     });
@@ -165,8 +140,8 @@ describe("Formatter", () => {
       formatter.runFormat("input text");
 
       expect(process.spawnSync).toHaveBeenCalledWith(
-        "elixir",
-        ["mix", "format", "-"],
+        "mix",
+        ["format", "-"],
         { input: "input text", shell: true }
       );
     });
